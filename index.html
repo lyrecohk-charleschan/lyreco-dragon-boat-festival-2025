@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyreco Dragon Boat Festival 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +13,10 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', 'Noto Sans TC', sans-serif;
             line-height: 1.6;
             color: #333;
+            background: #fff;
         }
 
         .container {
@@ -24,12 +26,13 @@
         }
 
         header {
-            background: #004aad;
+            background: rgba(0, 74, 173, 0.9);
             color: white;
             padding: 1rem 0;
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         header .container {
@@ -39,7 +42,12 @@
         }
 
         .logo {
-            height: 50px;
+            height: 60px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav ul {
@@ -54,23 +62,53 @@
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
+            transition: color 0.3s;
         }
 
         nav ul li a:hover {
-            text-decoration: underline;
+            color: #ff6200;
+        }
+
+        .language-toggle {
+            margin-left: 20px;
+        }
+
+        .language-toggle select {
+            padding: 5px;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            font-weight: 700;
         }
 
         .hero {
             background: url('assets/hero-bg.jpg') no-repeat center center/cover;
             color: white;
             text-align: center;
-            padding: 150px 20px;
-            margin-top: 70px;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
@@ -82,106 +120,92 @@
         .cta-button {
             background: #ff6200;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             text-decoration: none;
             border-radius: 5px;
-            font-weight: bold;
+            font-weight: 700;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .cta-button:hover {
             background: #e55a00;
+            transform: scale(1.05);
         }
 
         .section {
-            padding: 60px 20px;
+            padding: 80px 20px;
+            background: #f9f9f9;
+            transition: opacity 0.5s;
         }
 
         .section h2 {
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
+            color: #004aad;
         }
 
-        .package-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .package {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .package h3 {
-            margin-bottom: 1rem;
+        .section h2 span {
             font-size: 1.5rem;
+            display: block;
+            color: #333;
         }
 
-        .package ul {
-            list-style: disc;
-            text-align: left;
-            margin: 1rem 0;
-            padding-left: 20px;
-        }
-
-        .package .price {
-            font-weight: bold;
-            color: #ff6200;
-            margin-top: 1rem;
-        }
-
-        .voucher-grid {
+        .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-top: 20px;
         }
 
-        .voucher {
-            background: #f9f9f9;
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            border-radius: 5px;
             text-align: center;
+            transition: transform 0.3s;
         }
 
-        .voucher img {
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
             margin-bottom: 1rem;
         }
 
-        .voucher h3 {
+        .card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            color: #004aad;
         }
 
-        .voucher .price {
-            font-weight: bold;
-            color: #ff6200;
-            margin: 0.5rem 0;
+        .card h3 span {
+            font-size: 1.2rem;
+            display: block;
+            color: #333;
         }
 
-        .voucher .original-price {
-            text-decoration: line-through;
-            color: #666;
-            margin-right: 10px;
-        }
-
-        .workshop ul {
+        .card ul {
             list-style: disc;
             text-align: left;
             margin: 1rem 0;
             padding-left: 20px;
         }
 
-        .workshop .price {
+        .card .price {
             font-weight: bold;
             color: #ff6200;
             margin: 0.5rem 0;
+        }
+
+        .card .original-price {
+            text-decoration: line-through;
+            color: #666;
+            margin-right: 10px;
         }
 
         .redemption-locations li {
@@ -196,7 +220,16 @@
             background: #004aad;
             color: white;
             text-align: center;
-            padding: 1rem 0;
+            padding: 2rem 0;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -205,12 +238,30 @@
             }
 
             nav ul {
+                display: none;
                 flex-direction: column;
-                text-align: center;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 74, 173, 0.95);
+                padding: 20px;
+            }
+
+            nav ul.active {
+                display: flex;
             }
 
             nav ul li {
                 margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .language-toggle {
+                margin-left: 10px;
             }
         }
     </style>
@@ -220,79 +271,100 @@
         <div class="container">
             <img src="assets/lyreco-logo.png" alt="Lyreco Logo" class="logo">
             <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#packages">Packages</a></li>
-                    <li><a href="#workshop">Workshop</a></li>
-                    <li><a href="#vouchers">Vouchers</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <button class="hamburger" aria-label="Toggle Menu">☰</button>
+                <ul id="nav-menu">
+                    <li><a href="#home" data-en="Home" data-zh="首頁" data-ct="主頁">Home</a></li>
+                    <li><a href="#about" data-en="About" data-zh="關於" data-ct="關於">About</a></li>
+                    <li><a href="#packages" data-en="Packages" data-zh="活動套餐" data-ct="活動套餐">Packages</a></li>
+                    <li><a href="#workshop" data-en="Workshop" data-zh="工作坊" data-ct="工作坊">Workshop</a></li>
+                    <li><a href="#vouchers" data-en="Vouchers" data-zh="禮券" data-ct="糉券">Vouchers</a></li>
+                    <li><a href="#contact" data-en="Contact" data-zh="聯繫" data-ct="聯繫">Contact</a></li>
                 </ul>
+                <div class="language-toggle">
+                    <select id="language" aria-label="Select Language">
+                        <option value="en">English</option>
+                        <option value="zh">中文 (普通話)</option>
+                        <option value="ct">廣東話</option>
+                    </select>
+                </div>
             </nav>
         </div>
     </header>
 
     <section id="home" class="hero">
-        <div class="container">
-            <h1>Lyreco Delivers Wellness</h1>
-            <p>Celebrate Dragon Boat Festival 2025 with our employee wellness initiatives!</p>
-            <a href="#packages" class="cta-button">Explore Packages</a>
+        <div class="hero-content container">
+            <h1>
+                <span data-en="Lyreco Delivers Wellness" data-zh="Lyreco 送健康" data-ct="Lyreco 送健康">Lyreco Delivers Wellness</span>
+                <span data-en="Dragon Boat Festival 2025" data-zh="2025端午節" data-ct="2025端午節" style="font-size: 1.5rem; display: block;"></span>
+            </h1>
+            <p data-en="Celebrate with our employee wellness initiatives!" data-zh="與我們的員工健康計劃一起慶祝！" data-ct="同我哋嘅員工健康計劃一齊慶祝！"></p>
+            <a href="#packages" class="cta-button" data-en="Explore Packages" data-zh="探索套餐" data-ct="睇吓套餐">Explore Packages</a>
         </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
-            <h2>About Lyreco Delivers Wellness</h2>
-            <p>Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:</p>
+            <h2>
+                <span data-en="About Lyreco Delivers Wellness" data-zh="關於Lyreco送健康" data-ct="關於Lyreco送健康"></span>
+            </h2>
+            <p data-en="Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:" data-zh="Lyreco是香港、新加坡和韓國領先的職場解決方案提供商，致力於為企業提供健康計劃，提升員工體驗。我們提供可定制的健康項目：" data-ct="Lyreco係香港、新加坡同韓國嘅頂尖職場解決方案提供商，專注為公司帶嚟健康計劃，提升員工體驗。我哋提供可訂製嘅健康項目："></p>
             <ul>
-                <li>Wellness@Pantry</li>
-                <li>Wellness@Teams</li>
-                <li>Wellness@Workplace</li>
+                <li data-en="Wellness@Pantry" data-zh="健康@茶水間" data-ct="健康@茶水間">Wellness@Pantry</li>
+                <li data-en="Wellness@Teams" data-zh="健康@團隊" data-ct="健康@團隊">Wellness@Teams</li>
+                <li data-en="Wellness@Workplace" data-zh="健康@工作場所" data-ct="健康@工作間">Wellness@Workplace</li>
             </ul>
         </div>
     </section>
 
     <section id="packages" class="section">
         <div class="container">
-            <h2>Dragon Boat Festival Celebration Packages</h2>
-            <div class="package-grid">
-                <div class="package">
-                    <h3>50 Employees</h3>
+            <h2>
+                <span data-en="Dragon Boat Festival Celebration Packages" data-zh="端午節慶祝套餐" data-ct="端午節慶祝套餐"></span>
+            </h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>
+                        <span data-en="50 Employees" data-zh="50名員工" data-ct="50位員工"></span>
+                    </h3>
                     <ul>
-                        <li>New Crystal Sweet Rice Dumplings</li>
-                        <li>Wellness Herbal Tea (Choose 2):
+                        <li data-en="New Crystal Sweet Rice Dumplings" data-zh="新派水晶甜粽" data-ct="新派水晶甜糉">New Crystal Sweet Rice Dumplings</li>
+                        <li data-en="Wellness Herbal Tea (Choose 2):" data-zh="養生花茶（選2款）：" data-ct="養生花茶（揀2款）：">
                             <ul>
-                                <li>Goji Berry & Longan Chrysanthemum Tea</li>
-                                <li>Ginger & Longan Red Date Tea</li>
-                                <li>Kumquat & Pear Tea</li>
-                                <li>Rose & Hibiscus Goji Berry Tea</li>
-                                <li>Cassia Seed & Rose Chrysanthemum Tea</li>
+                                <li data-en="Goji Berry & Longan Chrysanthemum Tea" data-zh="枸杞桂圓菊花茶" data-ct="杞子桂圓菊花茶">Goji Berry & Longan Chrysanthemum Tea</li>
+                                <li data-en="Ginger & Longan Red Date Tea" data-zh="生薑桂圓紅棗茶" data-ct="生薑桂圓紅棗茶">Ginger & Longan Red Date Tea</li>
+                                <li data-en="Kumquat & Pear Tea" data-zh="金桔雪梨茶" data-ct="金桔雪梨茶">Kumquat & Pear Tea</li>
+                                <li data-en="Rose & Hibiscus Goji Berry Tea" data-zh="玫瑰洛神花枸杞茶" data-ct="玫瑰洛神花杞子茶">Rose & Hibiscus Goji Berry Tea</li>
+                                <li data-en="Cassia Seed & Rose Chrysanthemum Tea" data-zh="決明子玫瑰菊花茶" data-ct="決明子玫瑰菊花茶">Cassia Seed & Rose Chrysanthemum Tea</li>
                             </ul>
                         </li>
-                        <li>"Dragon Boat" Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)</li>
-                        <li>Basic Decorations & Photo Props</li>
-                        <li>2-Hour Event</li>
+                        <li data-en="&quot;Dragon Boat&quot; Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)" data-zh="「划龍舟」划艇機比賽（設分牌，勝出者獲粽券）" data-ct="「划龍舟」划艇機比賽（有分牌，贏家拎糉券）">&quot;Dragon Boat&quot; Rowing Machine Competition</li>
+                        <li data-en="Basic Decorations & Photo Props" data-zh="基本裝飾及拍照道具" data-ct="基本裝飾同影相道具">Basic Decorations & Photo Props</li>
+                        <li data-en="2-Hour Event" data-zh="2小時活動" data-ct="2小時活動">2-Hour Event</li>
                     </ul>
-                    <p class="price">$12,888 (avg. $258 per person)</p>
+                    <p class="price" data-en="$12,888 (avg. $258 per person)" data-zh="$12,888（平均每人$258）" data-ct="$12,888（平均每人$258）">$12,888 (avg. $258 per person)</p>
+                    <a href="#contact" class="cta-button" data-en="Inquire Now" data-zh="立即查詢" data-ct="而家查詢">Inquire Now</a>
                 </div>
-                <div class="package">
-                    <h3>100 Employees</h3>
+                <div class="card">
+                    <h3>
+                        <span data-en="100 Employees" data-zh="100名員工" data-ct="100位員工"></span>
+                    </h3>
                     <ul>
-                        <li>On-site Prepared Dragon Boat Takoyaki</li>
-                        <li>Wellness Herbal Tea (Choose 3):
+                        <li data-en="On-site Prepared Dragon Boat Takoyaki" data-zh="現場即製龍舟章魚小丸子" data-ct="現場整龍舟章魚小丸子">On-site Prepared Dragon Boat Takoyaki</li>
+                        <li data-en="Wellness Herbal Tea (Choose 3):" data-zh="養生花茶（選3款）：" data-ct="養生花茶（揀3款）：">
                             <ul>
-                                <li>Goji Berry & Longan Chrysanthemum Tea</li>
-                                <li>Ginger & Longan Red Date Tea</li>
-                                <li>Kumquat & Pear Tea</li>
-                                <li>Rose & Hibiscus Goji Berry Tea</li>
-                                <li>Cassia Seed & Rose Chrysanthemum Tea</li>
+                                <li data-en="Goji Berry & Longan Chrysanthemum Tea" data-zh="枸杞桂圓菊花茶" data-ct="杞子桂圓菊花茶">Goji Berry & Longan Chrysanthemum Tea</li>
+                                <li data-en="Ginger & Longan Red Date Tea" data-zh="生薑桂圓紅棗茶" data-ct="生薑桂圓紅棗茶">Ginger & Longan Red Date Tea</li>
+                                <li data-en="Kumquat & Pear Tea" data-zh="金桔雪梨茶" data-ct="金桔雪梨茶">Kumquat & Pear Tea</li>
+                                <li data-en="Rose & Hibiscus Goji Berry Tea" data-zh="玫瑰洛神花枸杞茶" data-ct="玫瑰洛神花杞子茶">Rose & Hibiscus Goji Berry Tea</li>
+                                <li data-en="Cassia Seed & Rose Chrysanthemum Tea" data-zh="決明子玫瑰菊花茶" data-ct="決明子玫瑰菊花茶">Cassia Seed & Rose Chrysanthemum Tea</li>
                             </ul>
                         </li>
-                        <li>Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)</li>
-                        <li>Basic Decorations & Photo Props</li>
-                        <li>2-Hour Event</li>
+                        <li data-en="Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)" data-zh="迷你包粽工作坊（每節15分鐘，每節15人，供100-120名員工）" data-ct="迷你包糉工作坊（每節15分鐘，每節15人，畀100-120位員工）">Mini Rice Dumpling Workshop</li>
+                        <li data-en="Basic Decorations & Photo Props" data-zh="基本裝飾及拍照道具" data-ct="基本裝飾同影相道具">Basic Decorations & Photo Props</li>
+                        <li data-en="2-Hour Event" data-zh="2小時活動" data-ct="2小時活動">2-Hour Event</li>
                     </ul>
-                    <p class="price">$20,888 (avg. $208 per person)</p>
+                    <p class="price" data-en="$20,888 (avg. $208 per person)" data-zh="$20,888（平均每人$208）" data-ct="$20,888（平均每人$208）">$20,888 (avg. $208 per person)</p>
+                    <a href="#contact" class="cta-button" data-en="Inquire Now" data-zh="立即查詢" data-ct="而家查詢">Inquire Now</a>
                 </div>
             </div>
         </div>
@@ -300,88 +372,432 @@
 
     <section id="workshop" class="section workshop">
         <div class="container">
-            <h2>Rice Dumpling Workshop</h2>
-            <p>Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided.</p>
-            <ul>
-                <li>Each participant makes and takes home 4 handmade dumplings:
-                    <ul>
-                        <li>2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)</li>
-                        <li>2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)</li>
-                    </ul>
-                </li>
-                <li>Duration: 1 Hour</li>
-                <li>Minimum: 20 Employees</li>
-                <li>Parent-Child Workshop Available (Inquire for Details)</li>
-            </ul>
-            <p class="price">$388 per staff</p>
+            <h2>
+                <span data-en="Rice Dumpling Workshop" data-zh="手工粽工作坊" data-ct="手工糉工作坊"></span>
+            </h2>
+            <div class="card">
+                <img src="assets/workshop.jpg" alt="Rice Dumpling Workshop">
+                <p data-en="Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided." data-zh="由經驗導師教授選擇餡料、摺疊粽葉及紮出結實粽子的步驟，完成後提供烹煮粽子的說明。" data-ct="由專業導師教你點揀餡料、摺竹葉同紮實糉，完場後仲有煮糉嘅指引。"></p>
+                <ul>
+                    <li data-en="Each participant makes and takes home 4 handmade dumplings:" data-zh="每位參加者製作並帶走4隻手工粽：" data-ct="每位參加者整同帶走4隻手工糉：">
+                        <ul>
+                            <li data-en="2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)" data-zh="2隻鮑魚咸肉粽（材料：鮑魚、五花腩、冬菇、咸蛋、花生、綠豆）" data-ct="2隻鮑魚咸肉糉（材料：鮑魚、五花腩、冬菇、咸蛋、花生、綠豆）">2 Abalone & Salted Pork Dumplings</li>
+                            <li data-en="2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)" data-zh="2隻紅豆鹼水粽（材料：自家紅豆蓉、糯米）" data-ct="2隻紅豆鹼水糉（材料：自家紅豆蓉、糯米）">2 Red Bean Alkaline Dumplings</li>
+                        </ul>
+                    </li>
+                    <li data-en="Duration: 1 Hour" data-zh="時長：1小時" data-ct="時間：1小時">Duration: 1 Hour</li>
+                    <li data-en="Minimum: 20 Employees" data-zh="最少：20名員工" data-ct="最少：20位員工">Minimum: 20 Employees</li>
+                    <li data-en="Parent-Child Workshop Available (Inquire for Details)" data-zh="設親子工作坊（請查詢詳情）" data-ct="有親子工作坊（查詢詳情）">Parent-Child Workshop Available</li>
+                </ul>
+                <p class="price" data-en="$388 per staff" data-zh="每人$388" data-ct="每人$388">$388 per staff</p>
+                <a href="#contact" class="cta-button" data-en="Book Now" data-zh="立即預約" data-ct="而家預約">Book Now</a>
+            </div>
         </div>
     </section>
 
     <section id="vouchers" class="section">
         <div class="container">
-            <h2>Rice Dumpling Vouchers</h2>
-            <p>Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations.</p>
-            <div class="voucher-grid">
-                <div class="voucher">
+            <h2>
+                <span data-en="Rice Dumpling Vouchers" data-zh="糯米粽禮券" data-ct="糉券"></span>
+            </h2>
+            <p data-en="Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations." data-zh="與LUBUBS合作，我們的禮券提供傳統香港製作的糯米粽，可在多個地點兌換。" data-ct="同LUBUBS合作，我哋嘅糉券提供正宗香港整嘅糉，喺多個地點換得。"></p>
+            <div class="card-grid">
+                <div class="card">
                     <img src="assets/dumpling1.jpg" alt="Salted Pork & Salted Egg Yolk Dumpling">
-                    <h3>Rice Dumpling with Salted Pork & Salted Egg Yolk</h3>
-                    <p>Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture. The sticky rice fully absorbs the flavors, offering a luxurious blend of savory and rich tastes, a perfect combination of tradition and indulgence.</p>
-                    <p class="price"><span class="original-price">$118</span> $98</p>
+                    <h3>
+                        <span data-en="Rice Dumpling with Salted Pork & Salted Egg Yolk" data-zh="黃金秘製蛋黃咸肉粽" data-ct="黃金秘製蛋黃咸肉糉"></span>
+                    </h3>
+                    <p data-en="Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture." data-zh="嚴選金黃流心咸蛋黃，搭配醇香咸肉，入口鹹香濃郁，油潤細膩。" data-ct="揀靚金黃流心咸蛋黃，配香濃咸肉，入口鹹香濃郁，油潤細滑。"></p>
+                    <p class="price"><span class="original-price" data-en="$118" data-zh="$118" data-ct="$118">$118</span> <span data-en="$98" data-zh="$98" data-ct="$98">$98</span></p>
                 </div>
-                <div class="voucher">
+                <div class="card">
                     <img src="assets/dumpling2.jpg" alt="Salted Pork, Salted Egg Yolk & XO Sauce Dumpling">
-                    <h3>Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce</h3>
-                    <p>Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice. The XO sauce’s sweet-spicy notes complement the salted pork, paired with soft sticky rice, delivering a classic Cantonese flavor with a harmonious blend of savory, spicy, and sweet aromas.</p>
-                    <p class="price"><span class="original-price">$128</span> $108</p>
+                    <h3>
+                        <span data-en="Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce" data-zh="XO醬瑤柱咸肉粽" data-ct="XO醬瑤柱咸肉糉"></span>
+                    </h3>
+                    <p data-en="Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice." data-zh="以極品XO醬入饌，帶來濃郁鮮香的層次感，微辣鮮甜。" data-ct="用頂級XO醬整，帶濃郁鮮香層次，微辣鮮甜。"></p>
+                    <p class="price"><span class="original-price" data-en="$128" data-zh="$128" data-ct="$128">$128</span> <span data-en="$108" data-zh="$108" data-ct="$108">$108</span></p>
                 </div>
-                <div class="voucher">
+                <div class="card">
                     <img src="assets/dumpling3.jpg" alt="Red Dates Paste Dumpling">
-                    <h3>Rice Dumpling with Red Dates Paste</h3>
-                    <p>A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness. The amber-hued, chewy sticky rice provides a tender, smooth texture. Enjoy with syrup for a nostalgic, perfectly balanced sweet flavor that’s never cloying.</p>
-                    <p class="price"><span class="original-price">$88</span> $78</p>
+                    <h3>
+                        <span data-en="Rice Dumpling with Red Dates Paste" data-zh="琥珀棗蓉梘水粽" data-ct="琥珀棗蓉鹼水糉"></span>
+                    </h3>
+                    <p data-en="A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness." data-zh="經典廣式甜粽，選用精選紅棗蓉作餡，細膩香甜。" data-ct="經典廣式甜糉，用精選紅棗蓉做餡，細膩香甜。"></p>
+                    <p class="price"><span class="original-price" data-en="$88" data-zh="$88" data-ct="$88">$88</span> <span data-en="$78" data-zh="$78" data-ct="$78">$78</span></p>
                 </div>
             </div>
-            <h3>Redemption Details</h3>
+            <h3 data-en="Redemption Details" data-zh="兌換詳情" data-ct="換領詳情"></h3>
             <ul>
-                <li><strong>Minimum Order Value:</strong> $200</li>
-                <li><strong>Cut-off Date:</strong> 15/5/2025</li>
-                <li><strong>Voucher Delivery:</strong> 20-23/5/2025</li>
-                <li><strong>Redemption Dates:</strong> 21-29/5/2025</li>
+                <li><strong data-en="Minimum Order Value:" data-zh="最少訂購額：" data-ct="最少訂購額："></strong> $200</li>
+                <li><strong data-en="Cut-off Date:" data-zh="截單日期：" data-ct="截單日期："></strong> 15/5/2025</li>
+                <li><strong data-en="Voucher Delivery:" data-zh="禮券送貨日期：" data-ct="糉券送貨日期："></strong> 20-23/5/2025</li>
+                <li><strong data-en="Redemption Dates:" data-zh="兌換日期：" data-ct="換領日期："></strong> 21-29/5/2025</li>
             </ul>
-            <h3>Redemption Locations</h3>
+            <h3 data-en="Redemption Locations" data-zh="兌換地點" data-ct="換領地點"></h3>
             <ul class="redemption-locations">
-                <li><span class="location-name">Gu Liang Cai (Central Market, 21-25/5)</span><br>Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central</li>
-                <li><span class="location-name">Chuan (Times Square, 21-29/5)</span><br>Shop 1102, Food Forum, Times Square, Causeway Bay</li>
-                <li><span class="location-name">Moon Palace (Kerry Centre, 21-29/5)</span><br>Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay</li>
-                <li><span class="location-name">The Queen (Tsim Sha Tsui, 21-29/5)</span><br>G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui</li>
-                <li><span class="location-name">Chuan Palace (MOKO, 21-29/5)</span><br>Shop 501, MOKO, Mong Kok</li>
-                <li><span class="location-name">Moon Palace (Festival Walk, 21-29/5)</span><br>Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong</li>
-                <li><span class="location-name">Full Moon House (The Wai, 21-25/5)</span><br>Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai</li>
-                <li><span class="location-name">Chuan Palace (YOHO Mall, 21-25/5)</span><br>Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long</li>
+                <li><span class="location-name" data-en="Gu Liang Cai (Central Market, 21-25/5)" data-zh="久両菜 (中環街市, 21-25/5)" data-ct="久両菜 (中環街市, 21-25/5)">Gu Liang Cai (Central Market, 21-25/5)</span><br><span data-en="Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central" data-zh="中環德輔道中80號及皇后大道中93號中環街市一樓124至125號舖" data-ct="中環德輔道中80號同皇后大道中93號中環街市一樓124至125號舖">Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central</span></li>
+                <li><span class="location-name" data-en="Chuan (Times Square, 21-29/5)" data-zh="川川 (時代廣場, 21-29/5)" data-ct="川川 (時代廣場, 21-29/5)">Chuan (Times Square, 21-29/5)</span><br><span data-en="Shop 1102, Food Forum, Times Square, Causeway Bay" data-zh="銅鑼灣勿地臣街1號時代廣場11樓1102號舖" data-ct="銅鑼灣勿地臣街1號時代廣場11樓1102號舖">Shop 1102, Food Forum, Times Square, Causeway Bay</span></li>
+                <li><span class="location-name" data-en="Moon Palace (Kerry Centre, 21-29/5)" data-zh="望月樓 (嘉里中心, 21-29/5)" data-ct="望月樓 (嘉里中心, 21-29/5)">Moon Palace (Kerry Centre, 21-29/5)</span><br><span data-en="Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay" data-zh="鰂魚涌英皇道683號嘉里中心2樓1號鋪" data-ct="鰂魚涌英皇道683號嘉里中心2樓1號舖">Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay</span></li>
+                <li><span class="location-name" data-en="The Queen (Tsim Sha Tsui, 21-29/5)" data-zh="后園 (尖沙咀, 21-29/5)" data-ct="后園 (尖沙咀, 21-29/5)">The Queen (Tsim Sha Tsui, 21-29/5)</span><br><span data-en="G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui" data-zh="尖沙咀廣東道富衛1881公館主樓地下" data-ct="尖沙咀廣東道富衛1881公館主樓地下">G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui</span></li>
+                <li><span class="location-name" data-en="Chuan Palace (MOKO, 21-29/5)" data-zh="念川居 (MOKO, 21-29/5)" data-ct="念川居 (MOKO, 21-29/5)">Chuan Palace (MOKO, 21-29/5)</span><br><span data-en="Shop 501, MOKO, Mong Kok" data-zh="旺角MOKO新世紀廣場5樓501號舖" data-ct="旺角MOKO新世紀廣場5樓501號舖">Shop 501, MOKO, Mong Kok</span></li>
+                <li><span class="location-name" data-en="Moon Palace (Festival Walk, 21-29/5)" data-zh="望月樓 (又一城, 21-29/5)" data-ct="望月樓 (又一城, 21-29/5)">Moon Palace (Festival Walk, 21-29/5)</span><br><span data-en="Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong" data-zh="九龍塘達之路80號又一城G25號舖" data-ct="九龍塘達之路80號又一城G25號舖">Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong</span></li>
+                <li><span class="location-name" data-en="Full Moon House (The Wai, 21-25/5)" data-zh="念月樓 (圍方, 21-25/5)" data-ct="念月樓 (圍方, 21-25/5)">Full Moon House (The Wai, 21-25/5)</span><br><span data-en="Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai" data-zh="沙田大圍車公廟路18號圍方2樓232舖" data-ct="沙田大圍車公廟路18號圍方2樓232舖">Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai</span></li>
+                <li><span class="location-name" data-en="Chuan Palace (YOHO Mall, 21-25/5)" data-zh="念川居 (形點, 21-25/5)" data-ct="念川居 (形點, 21-25/5)">Chuan Palace (YOHO Mall, 21-25/5)</span><br><span data-en="Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long" data-zh="元朗朗日路8-9號形點一期2樓2023-2027號舖" data-ct="元朗朗日路8-9號形點一期2樓2023-2027號舖">Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long</span></li>
             </ul>
         </div>
     </section>
 
     <section id="contact" class="section">
         <div class="container">
-            <h2>Contact Us</h2>
-            <p>We can personalize employee experiences according to your requirements and budgets.</p>
-            <p><strong>Contact Person:</strong> Charles Chan</p>
-            <p><strong>Phone:</strong> <a href="tel:+85267779473">+852 6777 9473</a></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/85267779473" target="_blank">Message Charles on WhatsApp</a></p>
-            <p><strong>Email:</strong> <a href="mailto:charles.chan@lyreco.com">charles.chan@lyreco.com</a></p>
-            <p><strong>Website:</strong> <a href="http://lyrecodeliverswellness.com" target="_blank">lyrecodeliverswellness.com</a></p>
+            <h2>
+                <span data-en="Contact Us" data-zh="聯繫我們" data-ct="聯繫我哋"></span>
+            </h2>
+            <p data-en="We can personalize employee experiences according to your requirements and budgets." data-zh="我們可根據您的需求和預算定制員工體驗。" data-ct="我哋可以按你嘅需要同預算訂製員工體驗。"></p>
+            <p><strong data-en="Contact Person:" data-zh="聯繫人：" data-ct="聯繫人："></strong> Charles Chan</p>
+            <p><strong data-en="Phone:" data-zh="電話：" data-ct="電話："></strong> <a href="tel:+85267779473">+852 6777 9473</a></p>
+            <p><strong data-en="WhatsApp:" data-zh="WhatsApp：" data-ct="WhatsApp："></strong> <a href="https://wa.me/85267779473" target="_blank" data-en="Message Charles on WhatsApp" data-zh="在WhatsApp聯繫Charles" data-ct="喺WhatsApp搵Charles">Message Charles on WhatsApp</a></p>
+            <p><strong data-en="Email:" data-zh="電郵：" data-ct="電郵："></strong> <a href="mailto:charles.chan@lyreco.com">charles.chan@lyreco.com</a></p>
+            <p><strong data-en="Website:" data-zh="網站：" data-ct="網站："></strong> <a href="http://lyrecodeliverswellness.com" target="_blank">lyrecodeliverswellness.com</a></p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>© 2025 Lyreco Delivers Wellness. All rights reserved.</p>
+            <p data-en="© 2025 Lyreco Delivers Wellness. All rights reserved." data-zh="© 2025 Lyreco送健康。版權所有。" data-ct="© 2025 Lyreco送健康。版權所有。">© 2025 Lyreco Delivers Wellness. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Language toggle functionality
+        const translations = {
+            en: {
+                // Navigation
+                'Home': 'Home',
+                'About': 'About',
+                'Packages': 'Packages',
+                'Workshop': 'Workshop',
+                'Vouchers': 'Vouchers',
+                'Contact': 'Contact',
+                // Hero
+                'Lyreco Delivers Wellness': 'Lyreco Delivers Wellness',
+                'Dragon Boat Festival 2025': 'Dragon Boat Festival 2025',
+                'Celebrate with our employee wellness initiatives!': 'Celebrate with our employee wellness initiatives!',
+                'Explore Packages': 'Explore Packages',
+                // About
+                'About Lyreco Delivers Wellness': 'About Lyreco Delivers Wellness',
+                'Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:': 'Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:',
+                'Wellness@Pantry': 'Wellness@Pantry',
+                'Wellness@Teams': 'Wellness@Teams',
+                'Wellness@Workplace': 'Wellness@Workplace',
+                // Packages
+                'Dragon Boat Festival Celebration Packages': 'Dragon Boat Festival Celebration Packages',
+                '50 Employees': '50 Employees',
+                '100 Employees': '100 Employees',
+                'New Crystal Sweet Rice Dumplings': 'New Crystal Sweet Rice Dumplings',
+                'Wellness Herbal Tea (Choose 2):': 'Wellness Herbal Tea (Choose 2):',
+                'Wellness Herbal Tea (Choose 3):': 'Wellness Herbal Tea (Choose 3):',
+                'Goji Berry & Longan Chrysanthemum Tea': 'Goji Berry & Longan Chrysanthemum Tea',
+                'Ginger & Longan Red Date Tea': 'Ginger & Longan Red Date Tea',
+                'Kumquat & Pear Tea': 'Kumquat & Pear Tea',
+                'Rose & Hibiscus Goji Berry Tea': 'Rose & Hibiscus Goji Berry Tea',
+                'Cassia Seed & Rose Chrysanthemum Tea': 'Cassia Seed & Rose Chrysanthemum Tea',
+                '"Dragon Boat" Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)': '"Dragon Boat" Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)',
+                'On-site Prepared Dragon Boat Takoyaki': 'On-site Prepared Dragon Boat Takoyaki',
+                'Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)': 'Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)',
+                'Basic Decorations & Photo Props': 'Basic Decorations & Photo Props',
+                '2-Hour Event': '2-Hour Event',
+                '$12,888 (avg. $258 per person)': '$12,888 (avg. $258 per person)',
+                '$20,888 (avg. $208 per person)': '$20,888 (avg. $208 per person)',
+                'Inquire Now': 'Inquire Now',
+                // Workshop
+                'Rice Dumpling Workshop': 'Rice Dumpling Workshop',
+                'Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided.': 'Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided.',
+                'Each participant makes and takes home 4 handmade dumplings:': 'Each participant makes and takes home 4 handmade dumplings:',
+                '2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)': '2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)',
+                '2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)': '2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)',
+                'Duration: 1 Hour': 'Duration: 1 Hour',
+                'Minimum: 20 Employees': 'Minimum: 20 Employees',
+                'Parent-Child Workshop Available (Inquire for Details)': 'Parent-Child Workshop Available (Inquire for Details)',
+                '$388 per staff': '$388 per staff',
+                'Book Now': 'Book Now',
+                // Vouchers
+                'Rice Dumpling Vouchers': 'Rice Dumpling Vouchers',
+                'Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations.': 'Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations.',
+                'Rice Dumpling with Salted Pork & Salted Egg Yolk': 'Rice Dumpling with Salted Pork & Salted Egg Yolk',
+                'Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture.': 'Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture.',
+                'Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce': 'Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce',
+                'Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice.': 'Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice.',
+                'Rice Dumpling with Red Dates Paste': 'Rice Dumpling with Red Dates Paste',
+                'A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness.': 'A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness.',
+                '$118': '$118',
+                '$98': '$98',
+                '$128': '$128',
+                '$108': '$108',
+                '$88': '$88',
+                '$78': '$78',
+                'Redemption Details': 'Redemption Details',
+                'Minimum Order Value:': 'Minimum Order Value:',
+                'Cut-off Date:': 'Cut-off Date:',
+                'Voucher Delivery:': 'Voucher Delivery:',
+                'Redemption Dates:': 'Redemption Dates:',
+                'Redemption Locations': 'Redemption Locations',
+                'Gu Liang Cai (Central Market, 21-25/5)': 'Gu Liang Cai (Central Market, 21-25/5)',
+                'Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central': 'Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central',
+                'Chuan (Times Square, 21-29/5)': 'Chuan (Times Square, 21-29/5)',
+                'Shop 1102, Food Forum, Times Square, Causeway Bay': 'Shop 1102, Food Forum, Times Square, Causeway Bay',
+                'Moon Palace (Kerry Centre, 21-29/5)': 'Moon Palace (Kerry Centre, 21-29/5)',
+                'Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay': 'Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay',
+                'The Queen (Tsim Sha Tsui, 21-29/5)': 'The Queen (Tsim Sha Tsui, 21-29/5)',
+                'G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui': 'G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui',
+                'Chuan Palace (MOKO, 21-29/5)': 'Chuan Palace (MOKO, 21-29/5)',
+                'Shop 501, MOKO, Mong Kok': 'Shop 501, MOKO, Mong Kok',
+                'Moon Palace (Festival Walk, 21-29/5)': 'Moon Palace (Festival Walk, 21-29/5)',
+                'Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong': 'Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong',
+                'Full Moon House (The Wai, 21-25/5)': 'Full Moon House (The Wai, 21-25/5)',
+                'Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai': 'Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai',
+                'Chuan Palace (YOHO Mall, 21-25/5)': 'Chuan Palace (YOHO Mall, 21-25/5)',
+                'Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long': 'Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long',
+                // Contact
+                'Contact Us': 'Contact Us',
+                'We can personalize employee experiences according to your requirements and budgets.': 'We can personalize employee experiences according to your requirements and budgets.',
+                'Contact Person:': 'Contact Person:',
+                'Phone:': 'Phone:',
+                'WhatsApp:': 'WhatsApp:',
+                'Message Charles on WhatsApp': 'Message Charles on WhatsApp',
+                'Email:': 'Email:',
+                'Website:': 'Website:',
+                // Footer
+                '© 2025 Lyreco Delivers Wellness. All rights reserved.': '© 2025 Lyreco Delivers Wellness. All rights reserved.'
+            },
+            zh: {
+                // Navigation
+                'Home': '首頁',
+                'About': '關於',
+                'Packages': '活動套餐',
+                'Workshop': '工作坊',
+                'Vouchers': '禮券',
+                'Contact': '聯繫',
+                // Hero
+                'Lyreco Delivers Wellness': 'Lyreco 送健康',
+                'Dragon Boat Festival 2025': '2025端午節',
+                'Celebrate with our employee wellness initiatives!': '與我們的員工健康計劃一起慶祝！',
+                'Explore Packages': '探索套餐',
+                // About
+                'About Lyreco Delivers Wellness': '關於Lyreco送健康',
+                'Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:': 'Lyreco是香港、新加坡和韓國領先的職場解決方案提供商，致力於為企業提供健康計劃，提升員工體驗。我們提供可定制的健康項目：',
+                'Wellness@Pantry': '健康@茶水間',
+                'Wellness@Teams': '健康@團隊',
+                'Wellness@Workplace': '健康@工作場所',
+                // Packages
+                'Dragon Boat Festival Celebration Packages': '端午節慶祝套餐',
+                '50 Employees': '50名員工',
+                '100 Employees': '100名員工',
+                'New Crystal Sweet Rice Dumplings': '新派水晶甜粽',
+                'Wellness Herbal Tea (Choose 2):': '養生花茶（選2款）：',
+                'Wellness Herbal Tea (Choose 3):': '養生花茶（選3款）：',
+                'Goji Berry & Longan Chrysanthemum Tea': '枸杞桂圓菊花茶',
+                'Ginger & Longan Red Date Tea': '生薑桂圓紅棗茶',
+                'Kumquat & Pear Tea': '金桔雪梨茶',
+                'Rose & Hibiscus Goji Berry Tea': '玫瑰洛神花枸杞茶',
+                'Cassia Seed & Rose Chrysanthemum Tea': '決明子玫瑰菊花茶',
+                '"Dragon Boat" Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)': '「划龍舟」划艇機比賽（設分牌，勝出者獲粽券）',
+                'On-site Prepared Dragon Boat Takoyaki': '現場即製龍舟章魚小丸子',
+                'Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)': '迷你包粽工作坊（每節15分鐘，每節15人，供100-120名員工）',
+                'Basic Decorations & Photo Props': '基本裝飾及拍照道具',
+                '2-Hour Event': '2小時活動',
+                '$12,888 (avg. $258 per person)': '$12,888（平均每人$258）',
+                '$20,888 (avg. $208 per person)': '$20,888（平均每人$208）',
+                'Inquire Now': '立即查詢',
+                // Workshop
+                'Rice Dumpling Workshop': '手工粽工作坊',
+                'Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided.': '由經驗導師教授選擇餡料、摺疊粽葉及紮出結實粽子的步驟，完成後提供烹煮粽子的說明。',
+                'Each participant makes and takes home 4 handmade dumplings:': '每位參加者製作並帶走4隻手工粽：',
+                '2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)': '2隻鮑魚咸肉粽（材料：鮑魚、五花腩、冬菇、咸蛋、花生、綠豆）',
+                '2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)': '2隻紅豆鹼水粽（材料：自家紅豆蓉、糯米）',
+                'Duration: 1 Hour': '時長：1小時',
+                'Minimum: 20 Employees': '最少：20名員工',
+                'Parent-Child Workshop Available (Inquire for Details)': '設親子工作坊（請查詢詳情）',
+                '$388 per staff': '每人$388',
+                'Book Now': '立即預約',
+                // Vouchers
+                'Rice Dumpling Vouchers': '糯米粽禮券',
+                'Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations.': '與LUBUBS合作，我們的禮券提供傳統香港製作的糯米粽，可在多個地點兌換。',
+                '米 Dumpling with Salted Pork & Salted Egg Yolk': '黃金秘製蛋黃咸肉粽',
+                'Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture.': '嚴選金黃流心咸蛋黃，搭配醇香咸肉，入口鹹香濃郁，油潤細膩。',
+                'Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce': 'XO醬瑤柱咸肉粽',
+                'Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice.': '以極品XO醬入饌，帶來濃郁鮮香的層次感，微辣鮮甜。',
+                'Rice Dumpling with Red Dates Paste': '琥珀棗蓉梘水粽',
+                'A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness.': '經典廣式甜粽，選用精選紅棗蓉作餡，細膩香甜。',
+                '$118': '$118',
+                '$98': '$98',
+                '$128': '$128',
+                '$108': '$108',
+                '$88': '$88',
+                '$78': '$78',
+                'Redemption Details': '兌換詳情',
+                'Minimum Order Value:': '最少訂購額：',
+                'Cut-off Date:': '截單日期：',
+                'Voucher Delivery:': '禮券送貨日期：',
+                'Redemption Dates:': '兌換日期：',
+                'Redemption Locations': '兌換地點',
+                'Gu Liang Cai (Central Market, 21-25/5)': '久両菜 (中環街市, 21-25/5)',
+                'Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central': '中環德輔道中80號及皇后大道中93號中環街市一樓124至125號舖',
+                'Chuan (Times Square, 21-29/5)': '川川 (時代廣場, 21-29/5)',
+                'Shop 1102, Food Forum, Times Square, Causeway Bay': '銅鑼灣勿地臣街1號時代廣場11樓1102號舖',
+                'Moon Palace (Kerry Centre, 21-29/5)': '望月樓 (嘉里中心, 21-29/5)',
+                'Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay': '鰂魚涌英皇道683號嘉里中心2樓1號鋪',
+                'The Queen (Tsim Sha Tsui, 21-29/5)': '后園 (尖沙咀, 21-29/5)',
+                'G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui': '尖沙咀廣東道富衛1881公館主樓地下',
+                'Chuan Palace (MOKO, 21-29/5)': '念川居 (MOKO, 21-29/5)',
+                'Shop 501, MOKO, Mong Kok': '旺角MOKO新世紀廣場5樓501號舖',
+                'Moon Palace (Festival Walk, 21-29/5)': '望月樓 (又一城, 21-29/5)',
+                'Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong': '九龍塘達之路80號又一城G25號舖',
+                'Full Moon House (The Wai, 21-25/5)': '念月樓 (圍方, 21-25/5)',
+                'Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai': '沙田大圍車公廟路18號圍方2樓232舖',
+                'Chuan Palace (YOHO Mall, 21-25/5)': '念川居 (形點, 21-25/5)',
+                'Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long': '元朗朗日路8-9號形點一期2樓2023-2027號舖',
+                // Contact
+                'Contact Us': '聯繫我們',
+                'We can personalize employee experiences according to your requirements and budgets.': '我們可根據您的需求和預算定制員工體驗。',
+                'Contact Person:': '聯繫人：',
+                'Phone:': '電話：',
+                'WhatsApp:': 'WhatsApp：',
+                'Message Charles on WhatsApp': '在WhatsApp聯繫Charles',
+                'Email:': '電郵：',
+                'Website:': '網站：',
+                // Footer
+                '© 2025 Lyreco Delivers Wellness. All rights reserved.': '© 2025 Lyreco送健康。版權所有。'
+            },
+            ct: {
+                // Navigation
+                'Home': '主頁',
+                'About': '關於',
+                'Packages': '活動套餐',
+                'Workshop': '工作坊',
+                'Vouchers': '糉券',
+                'Contact': '聯繫',
+                // Hero
+                'Lyreco Delivers Wellness': 'Lyreco 送健康',
+                'Dragon Boat Festival 2025': '2025端午節',
+                'Celebrate with our employee wellness initiatives!': '同我哋嘅員工健康計劃一齊慶祝！',
+                'Explore Packages': '睇吓套餐',
+                // About
+                'About Lyreco Delivers Wellness': '關於Lyreco送健康',
+                'Lyreco is the leading workplace solution provider in Hong Kong, Singapore, and Korea, pioneering in delivering wellness to corporations for a better employee experience. We offer customizable wellness initiatives:': 'Lyreco係香港、新加坡同韓國嘅頂尖職場解決方案提供商，專注為公司帶嚟健康計劃，提升員工體驗。我哋提供可訂製嘅健康項目：',
+                'Wellness@Pantry': '健康@茶水間',
+                'Wellness@Teams': '健康@團隊',
+                'Wellness@Workplace': '健康@工作間',
+                // Packages
+                'Dragon Boat Festival Celebration Packages': '端午節慶祝套餐',
+                '50 Employees': '50位員工',
+                '100 Employees': '100位員工',
+                'New Crystal Sweet Rice Dumplings': '新派水晶甜糉',
+                'Wellness Herbal Tea (Choose 2):': '養生花茶（揀2款）：',
+                'Wellness Herbal Tea (Choose 3):': '養生花茶（揀3款）：',
+                'Goji Berry & Longan Chrysanthemum Tea': '杞子桂圓菊花茶',
+                'Ginger & Longan Red Date Tea': '生薑桂圓紅棗茶',
+                'Kumquat & Pear Tea': '金桔雪梨茶',
+                'Rose & Hibiscus Goji Berry Tea': '玫瑰洛神花杞子茶',
+                'Cassia Seed & Rose Chrysanthemum Tea': '決明子玫瑰菊花茶',
+                '"Dragon Boat" Rowing Machine Competition (with ranking board, winners receive dumpling vouchers)': '「划龍舟」划艇機比賽（有分牌，贏家拎糉券）',
+                'On-site Prepared Dragon Boat Takoyaki': '現場整龍舟章魚小丸子',
+                'Mini Rice Dumpling Workshop (15-min sessions, 15 people per session, for 100-120 employees)': '迷你包糉工作坊（每節15分鐘，每節15人，畀100-120位員工）',
+                'Basic Decorations & Photo Props': '基本裝飾同影相道具',
+                '2-Hour Event': '2小時活動',
+                '$12,888 (avg. $258 per person)': '$12,888（平均每人$258）',
+                '$20,888 (avg. $208 per person)': '$20,888（平均每人$208）',
+                'Inquire Now': '而家查詢',
+                // Workshop
+                'Rice Dumpling Workshop': '手工糉工作坊',
+                'Led by experienced instructors, learn to select fillings, fold bamboo leaves, and tie firm rice dumplings, with post-workshop cooking instructions provided.': '由專業導師教你點揀餡料、摺竹葉同紮實糉，完場後仲有煮糉嘅指引。',
+                'Each participant makes and takes home 4 handmade dumplings:': '每位參加者整同帶走4隻手工糉：',
+                '2 Abalone & Salted Pork Dumplings (ingredients: abalone, pork belly, shiitake mushrooms, salted egg, peanuts, mung beans)': '2隻鮑魚咸肉糉（材料：鮑魚、五花腩、冬菇、咸蛋、花生、綠豆）',
+                '2 Red Bean Alkaline Dumplings (ingredients: homemade red bean paste, sticky rice)': '2隻紅豆鹼水糉（材料：自家紅豆蓉、糯米）',
+                'Duration: 1 Hour': '時間：1小時',
+                'Minimum: 20 Employees': '最少：20位員工',
+                'Parent-Child Workshop Available (Inquire for Details)': '有親子工作坊（查詢詳情）',
+                '$388 per staff': '每人$388',
+                'Book Now': '而家預約',
+                // Vouchers
+                'Rice Dumpling Vouchers': '糉券',
+                'Partnered with LUBUBS, our vouchers offer traditional Hong Kong-made rice dumplings. Redeem at multiple locations.': '同LUBUBS合作，我哋嘅糉券提供正宗香港整嘅糉，喺多個地點換得。',
+                'Rice Dumpling with Salted Pork & Salted Egg Yolk': '黃金秘製蛋黃咸肉糉',
+                'Selected golden runny salted egg yolk paired with savory salted pork, delivering a rich, aromatic, and oily texture.': '揀靚金黃流心咸蛋黃，配香濃咸肉，入口鹹香濃郁，油潤細滑。',
+                'Rice Dumpling with Salted Pork, Salted Egg Yolk & XO Sauce': 'XO醬瑤柱咸肉糉',
+                'Infused with premium XO sauce, this dumpling offers a rich, savory depth with a hint of spice.': '用頂級XO醬整，帶濃郁鮮香層次，微辣鮮甜。',
+                'Rice Dumpling with Red Dates Paste': '琥珀棗蓉鹼水糉',
+                'A classic Cantonese sweet dumpling with refined red date paste, offering a delicate sweetness.': '經典廣式甜糉，用精選紅棗蓉做餡，細膩香甜。',
+                '$118': '$118',
+                '$98': '$98',
+                '$128': '$128',
+                '$108': '$108',
+                '$88': '$88',
+                '$78': '$78',
+                'Redemption Details': '換領詳情',
+                'Minimum Order Value:': '最少訂購額：',
+                'Cut-off Date:': '截單日期：',
+                'Voucher Delivery:': '糉券送貨日期：',
+                'Redemption Dates:': '換領日期：',
+                'Redemption Locations': '換領地點',
+                'Gu Liang Cai (Central Market, 21-25/5)': '久両菜 (中環街市, 21-25/5)',
+                'Shop 124-125, 1/F, Central Market, 80 Des Voeux Road Central and 93 Queen’s Road Central, Central': '中環德輔道中80號同皇后大道中93號中環街市一樓124至125號舖',
+                'Chuan (Times Square, 21-29/5)': '川川 (時代廣場, 21-29/5)',
+                'Shop 1102, Food Forum, Times Square, Causeway Bay': '銅鑼灣勿地臣街1號時代廣場11樓1102號舖',
+                'Moon Palace (Kerry Centre, 21-29/5)': '望月樓 (嘉里中心, 21-29/5)',
+                'Unit 1, 2/F, Kerry Centre, 683 King’s Road, Quarry Bay': '鰂魚涌英皇道683號嘉里中心2樓1號舖',
+                'The Queen (Tsim Sha Tsui, 21-29/5)': '后園 (尖沙咀, 21-29/5)',
+                'G/F, FWD House 1881 Main Building, 2A Canton Road, Tsim Sha Tsui': '尖沙咀廣東道富衛1881公館主樓地下',
+                'Chuan Palace (MOKO, 21-29/5)': '念川居 (MOKO, 21-29/5)',
+                'Shop 501, MOKO, Mong Kok': '旺角MOKO新世紀廣場5樓501號舖',
+                'Moon Palace (Festival Walk, 21-29/5)': '望月樓 (又一城, 21-29/5)',
+                'Shop G25, Festival Walk, 80 Tat Chee Avenue, Kowloon Tong': '九龍塘達之路80號又一城G25號舖',
+                'Full Moon House (The Wai, 21-25/5)': '念月樓 (圍方, 21-25/5)',
+                'Shop 232, 2/F, The Wai, 18 Che Kung Miu Rd, Tai Wai': '沙田大圍車公廟路18號圍方2樓232舖',
+                'Chuan Palace (YOHO Mall, 21-25/5)': '念川居 (形點, 21-25/5)',
+                'Shop 2023-2027, 2/F, YOHO Mall I, 8-9 Long Yat Road, Yuen Long': '元朗朗日路8-9號形點一期2樓2023-2027號舖',
+                // Contact
+                'Contact Us': '聯繫我哋',
+                'We can personalize employee experiences according to your requirements and budgets.': '我哋可以按你嘅需要同預算訂製員工體驗。',
+                'Contact Person:': '聯繫人：',
+                'Phone:': '電話：',
+                'WhatsApp:': 'WhatsApp：',
+                'Message Charles on WhatsApp': '喺WhatsApp搵Charles',
+                'Email:': '電郵：',
+                'Website:': '網站：',
+                // Footer
+                '© 2025 Lyreco Delivers Wellness. All rights reserved.': '© 2025 Lyreco送健康。版權所有。'
+            }
+        };
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const key = element.getAttribute('data-en');
+                element.textContent = translations[lang][key] || key;
+            });
+            document.querySelectorAll('[data-zh]').forEach(element => {
+                const key = element.getAttribute('data-zh');
+                element.textContent = translations[lang][key] || key;
+            });
+            document.querySelectorAll('[data-ct]').forEach(element => {
+                const key = element.getAttribute('data-ct');
+                element.textContent = translations[lang][key] || key;
+            });
+        }
+
+        document.getElementById('language').addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        // Initial language set to English
+        updateLanguage('en');
+
+        // Hamburger menu toggle
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
